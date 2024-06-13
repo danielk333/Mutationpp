@@ -1,0 +1,12 @@
+<!-- Neutral 5 species air mixture  O O2 C N N2 NO CN CO C3 N+ O+ NO+ N2+ O2+ e- -->
+<mixture mechanism="air5_Park" thermo_db = "NASA-9" gsi_mechanism="reactions">
+
+    <species>
+        N O NO N2 O2 CO CN C C3
+    </species>
+
+    <element_compositions default="air">
+        <composition name="air"> N:0.79, O: 0.21 </composition>
+    </element_compositions>
+
+</mixture>

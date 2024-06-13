@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: mutationpp
+Version: 1.1.3
+Summary: An open-source library providing thermodynamic, transport,chemistry, and energy transfer properties associated with subsonic tohypersonic flows.
+Author: James B. Scoggins
+License: LGPL3
+Provides-Extra: test
+License-File: COPYING
+License-File: COPYING.LESSER
+
+An open-source library providing thermodynamic, transport,chemistry, and energy transfer properties associated with subsonic tohypersonic flows.

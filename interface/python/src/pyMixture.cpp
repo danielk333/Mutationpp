@@ -741,5 +741,80 @@ void py_export_Mixture(py::module &m) {
             self.averageDiffusionCoeffs(array.data());
             return py::array(py::cast(array));
           },
-          "Returns the average diffusion coefficients.");
-}
+          "Returns the average diffusion coefficients.")
+
+      .def("setSurfaceState", &Mutation::Mixture::setSurfaceState,
+           "Sets the surface state.")
+
+      .def("setSurfaceState",
+           [](Mutation::Mixture &self,
+                   std::vector<double> rho_i,
+                   const double T,
+                   const int vars)
+          {
+               self.setSurfaceState(rho_i.data(),&T,vars);
+           },
+           "Sets the surface state.")
+
+     .def("setSurfaceState",
+           [](Mutation::Mixture &self,
+                   std::vector<double> rho_i,
+                   std::vector<double> T,
+                   const int vars)
+          {
+               self.setSurfaceState(rho_i.data(),T.data(),vars);
+           },
+           "Sets the surface state.")
+
+     .def("setDiffusionModel",
+           [](Mutation::Mixture &self,
+                   std::vector<double> x,
+                   double dx)
+          {
+               self.setDiffusionModel(x.data(),dx);
+           },
+           "Sets diffusion model.")
+
+     .def("solveSurfaceBalance",
+           [](Mutation::Mixture &self)
+          {
+               self.solveSurfaceBalance();
+           },
+           "solve surface balance.")
+
+      .def("getSurfaceState",
+           [](Mutation::Mixture &self,
+                   const int vars)
+          {
+               std::vector<double> rhoi(self.nSpecies());
+               double T;
+
+               self.getSurfaceState(rhoi.data(), &T, vars);
+               return py::make_tuple(py::array(py::cast(rhoi)), T);
+           },
+           "Gets the surface state.")
+
+
+      .def("surfaceReactionRates", 
+          [](Mutation::Mixture &self)
+          {
+               std::vector<double> v1(self.nSpecies());
+
+               self.surfaceReactionRates(v1.data());
+               return py::array(py::cast(v1));
+
+          },
+          "Gets the surface reaction rates for each species.")
+          
+      .def("getMassBlowingRate",
+          [](Mutation::Mixture &self )
+          {
+               double mdot;
+               
+               self.getMassBlowingRate(mdot);
+               return mdot;
+          },
+          "Gets the mass blowing rate")
+     ;
+
+          }
